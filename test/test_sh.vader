@@ -1,0 +1,22 @@
+Given sh:
+  if true; then
+    for item in a b c; do
+
+    done
+  fi
+
+Do:
+  }
+  dam
+
+Expect:
+  if true; then
+  fi
+
+Do:
+  j
+  dam
+
+Expect:
+  if true; then
+  fi

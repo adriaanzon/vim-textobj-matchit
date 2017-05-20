@@ -14,7 +14,7 @@ function! s:closest_pair() abort
   let skip = s:skip()
   let candidates = {}
 
-  for pairs in map(filter(split(b:match_words, ','), 'v:val =~ "\\w"'), 'split(v:val, ":")')
+  for pairs in map(filter(split(b:match_words, '\\\@<!,'), 'v:val =~ ''\w'''), 'split(v:val, ''\\\@<!:'')')
     let [lnum, col] = searchpairpos(pairs[0], '', pairs[-1:][0], 'nW', skip)
     if lnum
       let candidates[lnum] = [0, lnum, col, 0]

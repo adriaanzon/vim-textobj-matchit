@@ -10,6 +10,9 @@ function! s:closest_pair() abort
   if !exists('g:loaded_matchit')
     throw 'This plugin requires matchit.vim to be enabled'
   endif
+  if !exists('b:match_words')
+    return 0
+  endif
 
   let skip = s:skip()
   let candidates = {}

@@ -24,7 +24,7 @@ function! s:closest_pair() abort
     endif
   endfor
 
-  if empty('candidates')
+  if empty(candidates)
     return 0
   endif
 

@@ -4,8 +4,8 @@ endif
 
 call textobj#user#plugin('matchit', {
       \   '-': {
-      \     'select-a': 'am', '*select-a-function*': 'textobj#matchit#select_a',
-      \     'select-i': 'im', '*select-i-function*': 'textobj#matchit#select_i',
+      \     'select-a': 'am', 'select-a-function': 'textobj#matchit#select_a',
+      \     'select-i': 'im', 'select-i-function': 'textobj#matchit#select_i',
       \   }
       \ })
 

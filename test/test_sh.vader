@@ -5,7 +5,7 @@ Given sh:
     done
   fi
 
-Do:
+Do (Position the cursor inside the inner structure):
   }
   dam
 
@@ -13,10 +13,10 @@ Expect:
   if true; then
   fi
 
-Do:
+Do (Position the cursor before the start pattern):
   j
   dam
 
-Expect:
+Expect (It should still delete the structure next to the cursor):
   if true; then
   fi

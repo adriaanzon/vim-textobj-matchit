@@ -34,7 +34,7 @@ Expect:
   end
 
 Do (Position the cursor on the end pattern):
-  jj^
+  3j^
   dam
 
 Expect (It should still remove the structure under the cursor):

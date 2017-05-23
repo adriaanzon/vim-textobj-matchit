@@ -10,6 +10,16 @@ function! s:skip() abort
         \ : 'synIDattr(synID(line("."),col("."),1),"name") =~? "comment\\|string"'
 endfunction
 
+function! s:parse_match_words() abort
+  return map(
+        \   map(
+        \     filter(split(b:match_words, '\\\@<!,'), 'v:val =~ ''\w'''),
+        \     'split(v:val, ''\\\@<!:'')'
+        \   ),
+        \   '[v:val[0], v:val[-1:][0]]'
+        \ )
+endfunction
+
 function! s:closest_pair() abort
   if !exists('g:loaded_matchit')
     call s:throw('This plugin requires matchit.vim to be enabled')
@@ -20,8 +30,8 @@ function! s:closest_pair() abort
   let skip = s:skip()
   let candidates = {}
 
-  for pairs in map(filter(split(b:match_words, '\\\@<!,'), 'v:val =~ ''\w'''), 'split(v:val, ''\\\@<!:'')')
-    let [lnum, col] = searchpairpos(pairs[0], '', pairs[-1:][0], 'nW', skip)
+  for [start, end] in s:parse_match_words()
+    let [lnum, col] = searchpairpos(start, '', end, 'nW', skip)
     if lnum
       let candidates[lnum] = [0, lnum, col, 0]
     endif

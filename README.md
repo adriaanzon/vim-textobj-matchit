@@ -8,7 +8,7 @@ A Vim plugin that creates text objects from matchit patterns, to be used with:
 * Vim script (`if…endif`, `for…endfor`)
 * Any other filetype that has matchit definitions like these...
 
-## Installation
+## :package: Installation
 
 Depends on [vim-textobj-user][textobj-user] and [matchit][matchit].
 
@@ -22,7 +22,7 @@ runtime macros/matchit.vim
 It's likely that matchit is already enabled. You can check so by running
 `:echo g:loaded_matchit`. It will return `1` when it's enabled.
 
-## Usage
+## :sparkles: Usage
 
 (TODO)
 
@@ -47,7 +47,7 @@ This plugin derives from [vim-textobj-rubyblock][textobj-rubyblock] and
 [vim-textobj-blade-directive][textobj-blade-directive]. I wanted something
 similar that works for every filetype, so that is why I created this plugin.
 
-## License
+## :page_facing_up: License
 
 Copyright © Adriaan Zonnenberg. Distributed under the same terms as Vim itself.
 See `:help license`.

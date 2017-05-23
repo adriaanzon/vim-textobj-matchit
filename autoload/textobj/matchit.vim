@@ -55,14 +55,14 @@ endfunction
 
 function! s:select(start_adjustment, end_adjustment) abort
   try
-    let end = s:closest_pair()
-    call setpos('.', end)
+    let end_pos = s:closest_pair()
+    call setpos('.', end_pos)
     normal %
-    let start = getpos('.')
-    let start[1] = start[1] + a:start_adjustment
-    let end[1] = end[1] + a:end_adjustment
+    let start_pos = getpos('.')
+    let start_pos[1] = start_pos[1] + a:start_adjustment
+    let end_pos[1] = end_pos[1] + a:end_adjustment
 
-    return ['V', start, end]
+    return ['V', start_pos, end_pos]
   catch /^textobj-matchit: No match found/
     return 0
   endtry

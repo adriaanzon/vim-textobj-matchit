@@ -59,6 +59,12 @@ function! s:select(start_adjustment, end_adjustment) abort
     call setpos('.', end_pos)
     normal %
     let start_pos = getpos('.')
+
+    " Cancel when the cursor doesn't move after invoking matchit
+    if start_pos == end_pos
+      return 0
+    endif
+
     let start_pos[1] = start_pos[1] + a:start_adjustment
     let end_pos[1] = end_pos[1] + a:end_adjustment
 

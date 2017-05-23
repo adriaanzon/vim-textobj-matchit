@@ -33,13 +33,15 @@ If you'd like different mappings, for example `i%` and `a%`, you can define
 them like so:
 
 ```vim
-xmap a%  <Plug>(textobj-matchit)
-omap a%  <Plug>(textobj-matchit)
-xmap i%  <Plug>(textobj-matchit)
-omap i%  <Plug>(textobj-matchit)
+let g:textobj_matchit_no_default_key_mappings = 1
+
+xmap a%  <Plug>(textobj-matchit-a)
+omap a%  <Plug>(textobj-matchit-a)
+xmap i%  <Plug>(textobj-matchit-i)
+omap i%  <Plug>(textobj-matchit-i)
 ```
 
-## History :man_teacher:
+## :man_teacher: History
 
 This plugin derives from [vim-textobj-rubyblock][textobj-rubyblock] and
 [vim-textobj-blade-directive][textobj-blade-directive]. I wanted something

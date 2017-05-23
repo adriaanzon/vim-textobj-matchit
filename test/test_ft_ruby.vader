@@ -41,6 +41,14 @@ Expect (It should still remove the structure under the cursor):
   if true
   end
 
+Do (Position the cursor on the end of the end pattern):
+  3j$
+  dam
+
+Expect (It should still remove the structure under the cursor):
+  if true
+  end
+
 Do (Position the cursor before the start pattern):
   j
   dam

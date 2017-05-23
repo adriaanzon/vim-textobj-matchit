@@ -20,6 +20,25 @@ function! s:parse_match_words() abort
         \ )
 endfunction
 
+" Position the cursor to prepare for a searchpair(), and get the necessary
+" flags according to the context of the cursor position.
+function! s:flags(start, end)
+  let cursor_col = getpos('.')[2]
+  let end_match_col = match(getline('.'), a:end) + 1
+
+  if end_match_col && end_match_col <= cursor_col
+    call cursor('.', end_match_col)
+    return 'cnW'
+  endif
+
+  let start_match_col = match(getline('.'), a:start) + 1
+  if start_match_col >= cursor_col
+    call cursor('.', start_match_col)
+  endif
+
+  return 'nW'
+endfunction
+
 function! s:closest_pair() abort
   if !exists('g:loaded_matchit')
     call s:throw('This plugin requires matchit.vim to be enabled')
@@ -27,11 +46,10 @@ function! s:closest_pair() abort
     call s:throw('No match found')
   endif
 
-  let skip = s:skip()
   let candidates = {}
 
   for [start, end] in s:parse_match_words()
-    let [lnum, col] = searchpairpos(start, '', end, 'nW', skip)
+    let [lnum, col] = searchpairpos(start, '', end, s:flags(start, end), s:skip())
     if lnum
       let candidates[lnum] = [0, lnum, col, 0]
     endif

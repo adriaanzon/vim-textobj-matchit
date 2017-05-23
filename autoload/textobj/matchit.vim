@@ -1,3 +1,7 @@
+function! s:throw(exception)
+  throw 'textobj-matchit: ' . a:exception
+endfunction
+
 " TODO: Get skip pattern like matchit's s:ParseSkip() does.
 " If b:endwise_syngroups is available, use that because it's more reliable.
 function! s:skip() abort
@@ -8,10 +12,9 @@ endfunction
 
 function! s:closest_pair() abort
   if !exists('g:loaded_matchit')
-    throw 'This plugin requires matchit.vim to be enabled'
-  endif
-  if !exists('b:match_words')
-    return 0
+    call s:throw('This plugin requires matchit.vim to be enabled')
+  elseif !exists('b:match_words')
+    call s:throw('No match found')
   endif
 
   let skip = s:skip()
@@ -25,7 +28,7 @@ function! s:closest_pair() abort
   endfor
 
   if empty(candidates)
-    return 0
+    call s:throw('No match found')
   endif
 
   let closest = keys(candidates)[0]
@@ -40,33 +43,25 @@ function! s:closest_pair() abort
   return candidates[closest]
 endfunction
 
-function! textobj#matchit#select_a() abort
-  let end = s:closest_pair()
-
-  if type(end) == v:t_list
+function! s:select(start_adjustment, end_adjustment) abort
+  try
+    let end = s:closest_pair()
     call setpos('.', end)
-
     normal %
     let start = getpos('.')
+    let start[1] = start[1] + a:start_adjustment
+    let end[1] = end[1] + a:end_adjustment
 
     return ['V', start, end]
-  else
+  catch /^textobj-matchit: No match found/
     return 0
-  endif
+  endtry
+endfunction
+
+function! textobj#matchit#select_a() abort
+  return s:select(0, 0)
 endfunction
 
 function! textobj#matchit#select_i() abort
-  let end = s:closest_pair()
-
-  if type(end) == v:t_list
-    call setpos('.', end)
-
-    normal %j
-    let start = getpos('.')
-    let end[1] = l:end[1] - 1
-
-    return ['V', start, end]
-  else
-    return 0
-  endif
+  return s:select(1, -1)
 endfunction

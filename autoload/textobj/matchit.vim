@@ -1,5 +1,7 @@
-function! s:throw(exception)
-  throw 'textobj-matchit: ' . a:exception
+function! s:throw_if(condition, exception)
+  if a:condition
+    throw 'textobj-matchit: ' . a:exception
+  endif
 endfunction
 
 function! s:skip() abort
@@ -54,11 +56,8 @@ function! s:flags(start, end)
 endfunction
 
 function! s:closest_pair() abort
-  if !exists('g:loaded_matchit')
-    call s:throw('This plugin requires matchit.vim to be enabled')
-  elseif !exists('b:match_words')
-    call s:throw('No match found')
-  endif
+  call s:throw_if(!exists('g:loaded_matchit'), 'Matchit.vim not enabled')
+  call s:throw_if(!exists('b:match_words'), 'No match found')
 
   let candidates = {}
 
@@ -69,9 +68,7 @@ function! s:closest_pair() abort
     endif
   endfor
 
-  if empty(candidates)
-    call s:throw('No match found')
-  endif
+  call s:throw_if(empty(candidates), 'No match found')
 
   let closest = keys(candidates)[0]
   if len(candidates) > 1
@@ -92,10 +89,8 @@ function! s:select(start_adjustment, end_adjustment) abort
     normal %
     let start_pos = getpos('.')
 
-    " Cancel when the cursor doesn't move after invoking matchit
-    if start_pos == end_pos
-      return 0
-    endif
+    " Give up when the cursor doesn't move after invoking matchit
+    call s:throw_if(start_pos == end_pos, 'No match found')
 
     let start_pos[1] = start_pos[1] + a:start_adjustment
     let end_pos[1] = end_pos[1] + a:end_adjustment

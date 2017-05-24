@@ -2,12 +2,26 @@ function! s:throw(exception)
   throw 'textobj-matchit: ' . a:exception
 endfunction
 
-" TODO: Get skip pattern like matchit's s:ParseSkip() does.
-" If b:endwise_syngroups is available, use that because it's more reliable.
 function! s:skip() abort
-  return exists('b:match_skip')
-        \ ? b:match_skip
-        \ : 'synIDattr(synID(line("."),col("."),1),"name") =~? "comment\\|string"'
+  " TODO If b:endwise_syngroups is available, use that because it's more reliable for searching.
+  if !exists('b:match_skip')
+    return 'synIDattr(synID(line("."),col("."),1),"name") =~? "comment\\|string"'
+  endif
+
+  " Adapted from matchit.vim's s:ParseSkip()
+  if b:match_skip[1] == ":"
+    if b:match_skip[0] == "s"
+      return "synIDattr(synID(line('.'),col('.'),1),'name') =~? '" . strpart(b:match_skip,2) . "'"
+    elseif b:match_skip[0] == "S"
+      return "synIDattr(synID(line('.'),col('.'),1),'name') !~? '" . strpart(b:match_skip,2) . "'"
+    elseif b:match_skip[0] == "r"
+      return "strpart(getline('.'),0,col('.'))=~'" . strpart(b:match_skip,2). "'"
+    elseif b:match_skip[0] == "R"
+      return = "strpart(getline('.'),0,col('.'))!~'" . strpart(b:match_skip,2). "'"
+    endif
+  endif
+
+  return b:match_skip
 endfunction
 
 function! s:parse_match_words() abort

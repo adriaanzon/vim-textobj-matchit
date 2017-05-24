@@ -108,3 +108,14 @@ endfunction
 function! textobj#matchit#select_i() abort
   return s:select(1, -1)
 endfunction
+
+function! textobj#matchit#map(char) abort
+  if get(g:, 'textobj_matchit_filetype_mappings', 0)
+        \ && empty(maparg('a' . a:char, 'x')) && empty(maparg('a' . a:char, 'o'))
+        \ && empty(maparg('i' . a:char, 'x')) && empty(maparg('i' . a:char, 'o'))
+    execute 'xmap <buffer> a' . a:char . ' <Plug>(textobj-matchit-a)'
+    execute 'omap <buffer> a' . a:char . ' <Plug>(textobj-matchit-a)'
+    execute 'xmap <buffer> i' . a:char . ' <Plug>(textobj-matchit-i)'
+    execute 'omap <buffer> i' . a:char . ' <Plug>(textobj-matchit-i)'
+  endif
+endfunction

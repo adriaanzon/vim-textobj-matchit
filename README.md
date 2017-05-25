@@ -24,22 +24,9 @@ It's likely that matchit is already enabled. You can check so by running
 
 ## :sparkles: Usage
 
-(TODO)
+(TODO: usage summary)
 
-This plugin ignores the regular matchit pairs like `(:),[:],{:}`. Those
-characters already have text objects of their own.
-
-If you'd like different mappings, for example `i%` and `a%`, you can define
-them like so:
-
-```vim
-let g:textobj_matchit_no_default_key_mappings = 1
-
-xmap a%  <Plug>(textobj-matchit-a)
-omap a%  <Plug>(textobj-matchit-a)
-xmap i%  <Plug>(textobj-matchit-i)
-omap i%  <Plug>(textobj-matchit-i)
-```
+See `:h textobj-matchit` for more details.
 
 ## :man_teacher: History
 

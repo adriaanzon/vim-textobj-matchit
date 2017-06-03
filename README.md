@@ -28,8 +28,8 @@ Textobj-matchit maps 2 keystrokes: `am` and `im`. They work like any other text
 object: `am` selects the _all_ of the matchit pair, `im` the _inner_ portion of
 the matchit pair.
 
-See `:h textobj-matchit` for more details, including instructions on how to
-define your own key mappings.
+See [`:h textobj-matchit`](doc/textobj-matchit.txt) for more details, including
+instructions on how to define your own key mappings.
 
 ## :man_teacher: History
 

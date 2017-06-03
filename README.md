@@ -6,7 +6,7 @@ A Vim plugin that creates text objects from matchit pairs, to be used with:
 * Blade (`@section…@endsection`)
 * Shell (`if…fi`, `for…done`)
 * Vim script (`if…endif`, `for…endfor`)
-* Any other filetype that defines similar matchit pairs
+* :man_shrugging: Any other filetype that defines similar matchit pairs
 
 ## :package: Installation
 

@@ -1,1 +1,1 @@
-call textobj#matchit#map('l')
+call textobj#matchit#map('e')

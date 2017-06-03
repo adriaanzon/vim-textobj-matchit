@@ -1,12 +1,5 @@
-*textobj-matchit.txt*   Creates text objects from matchit patterns
+*textobj-matchit.txt*   Creates text objects from matchit pairs
 *textobj-matchit*
-
-==============================================================================
-CONTENTS                                              *textobj-matchit-contents*
-
-  1. Introduction.................................|textobj-matchit-introduction|
-  2. Mappings.........................................|textobj-matchit-mappings|
-  3. Options...........................................|textobj-matchit-options|
 
 ==============================================================================
 INTRODUCTION                                      *textobj-matchit-introduction*
@@ -28,8 +21,9 @@ MAPPINGS                                              *textobj-matchit-mappings*
                                                             *textobj-matchit-im*
                                                             *textobj-matchit-am*
 
-By default, textobj-matchit maps to `am` and `im`. If you'd wish, you can
-change them to, for example, `a%` and `i%`, as a mnemonic for |matchit-%|:
+By default, textobj-matchit maps to `am` and `im`. If you wish, you can change
+them to something else. In the following example, we map them to `a%` and `i%`,
+as a mnemonic for |matchit-%|:
 >
   xmap a%  <Plug>(textobj-matchit-a)
   omap a%  <Plug>(textobj-matchit-a)
@@ -51,7 +45,14 @@ g:textobj_matchit_filetype_mappings        *g:textobj_matchit_filetype_mappings*
   Default: `0`
 
   Enable extra mappings for various filetypes. These are aliases for the
-  existing `im` and `am`, and are mainly intended to replace existing plugins.
+  existing `am` and `im`, and are mainly intended to replace existing plugins.
+
+  | filetype | mappings | mnemonic    |
+  | -------- | -------- | --------    |
+  | blade    | ad, id   | directive   |
+  | lua      | al, il   |             |
+  | ruby     | ar, ir   |             |
+  | tex      | ae, ie   | environment |
 
 ------------------------------------------------------------------------------
  vim:tw=78:ts=8:ft=help:norl:

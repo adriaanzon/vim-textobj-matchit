@@ -1,12 +1,12 @@
 # vim-textobj-matchit [![CircleCI](https://circleci.com/gh/adriaanzon/vim-textobj-matchit.svg?style=svg)](https://circleci.com/gh/adriaanzon/vim-textobj-matchit)
 
-A Vim plugin that creates text objects from matchit patterns, to be used with:
+A Vim plugin that creates text objects from matchit pairs, to be used with:
 
 * Ruby (`if…end`, `def…end`)
 * Blade (`@section…@endsection`)
 * Shell (`if…fi`, `for…done`)
 * Vim script (`if…endif`, `for…endfor`)
-* Any other filetype that has matchit definitions like these...
+* Any other filetype that defines similar matchit pairs
 
 ## :package: Installation
 
@@ -24,9 +24,12 @@ It's likely that matchit is already enabled. You can check so by running
 
 ## :sparkles: Usage
 
-(TODO: usage summary)
+Textobj-matchit maps 2 keystrokes: `am` and `im`. They work like any other text
+object: `am` selects the _all_ of the matchit pair, `im` the _inner_ portion of
+the matchit pair.
 
-See `:h textobj-matchit` for more details.
+See `:h textobj-matchit` for more details, including instructions on how to
+define your own key mappings.
 
 ## :man_teacher: History
 

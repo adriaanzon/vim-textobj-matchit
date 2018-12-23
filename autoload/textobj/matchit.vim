@@ -119,3 +119,5 @@ function! textobj#matchit#map(char) abort
     execute 'omap <buffer> i' . a:char . ' <Plug>(textobj-matchit-i)'
   endif
 endfunction
+
+let g:textobj#matchit#can_map_surround = exists('loaded_surround') && get(g:, 'textobj_matchit_surround_mappings', 1)

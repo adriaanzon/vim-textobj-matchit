@@ -26,10 +26,10 @@ function! s:skip() abort
   return b:match_skip
 endfunction
 
-function! s:parse_match_words() abort
+function! textobj#matchit#parse_match_words(match_words) abort
   return map(
         \   map(
-        \     filter(split(b:match_words, '\\\@<!,'), 'v:val =~ ''\w'''),
+        \     filter(split(a:match_words, '\\\@<!,'), 'v:val =~ ''\w'''),
         \     'split(v:val, ''\\\@<!:'')'
         \   ),
         \   '[v:val[0], v:val[-1:][0]]'
@@ -61,7 +61,7 @@ function! s:closest_pair() abort
 
   let candidates = {}
 
-  for [start, end] in s:parse_match_words()
+  for [start, end] in textobj#matchit#parse_match_words(b:match_words)
     let [lnum, col] = searchpairpos(start, '', end, s:flags(start, end), s:skip())
     if lnum
       let candidates[lnum] = [0, lnum, col, 0]

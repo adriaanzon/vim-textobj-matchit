@@ -46,7 +46,7 @@ endfunction
 " flags according to the context of the cursor position.
 function! s:flags(start, end)
   let cursor_col = getpos('.')[2]
-  let end_match_col = match(getline('.'), a:end) + 1
+  let end_match_col = match(getline('.'), substitute(a:end, '\\\@<!\\\d', '', '')) + 1
 
   if end_match_col && end_match_col <= cursor_col
     call cursor('.', end_match_col)

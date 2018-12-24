@@ -26,6 +26,12 @@ function! s:skip() abort
   return b:match_skip
 endfunction
 
+" Convert a string in b:match_words format to an array of pairs, containing
+" only the start and end patterns.
+"
+" Matches without 'word' characters are filtered out. This is what makes this
+" plugin only operate on pairs like if/endif, instead of simple pairs like
+" those found in &matchpairs.
 function! textobj#matchit#parse_match_words(match_words) abort
   return map(
         \   map(

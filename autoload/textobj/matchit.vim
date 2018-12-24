@@ -35,7 +35,7 @@ endfunction
 function! textobj#matchit#parse_match_words(match_words) abort
   return map(
         \   map(
-        \     filter(split(a:match_words, '\\\@<!,'), {_, group -> group =~ '\w'}),
+        \     filter(split(a:match_words, '\\\@<!,'), {_, group -> group =~ '\\\@<!\w'}),
         \     {_, group -> split(group, '\\\@<!:')}
         \   ),
         \   {_, patterns -> [patterns[0], patterns[-1:][0]]}

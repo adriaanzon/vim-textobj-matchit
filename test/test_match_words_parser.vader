@@ -1,2 +1,8 @@
 Execute (it ignores a function name):
   Assert empty(textobj#matchit#parse_match_words('GetMatchWords()'))
+
+Execute (it doesn't match escaped word-characters):
+  Assert empty(textobj#matchit#parse_match_words('\d:\d'))
+
+Execute (it does match word-characters preceded by an escaped backslash):
+  Assert !empty(textobj#matchit#parse_match_words('\\d:\\d'))

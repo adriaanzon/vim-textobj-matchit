@@ -1,3 +1,5 @@
+let s:notslash = '\\\@<!\%(\\\\\)*'
+
 function! s:throw_if(condition, exception)
   if a:condition
     throw 'textobj-matchit: ' . a:exception
@@ -39,8 +41,8 @@ function! textobj#matchit#parse_match_words(match_words) abort
 
   return map(
         \   map(
-        \     filter(split(a:match_words, '\\\@<!,'), {_, group -> group =~ '\\\@<!\w'}),
-        \     {_, group -> split(group, '\\\@<!:')}
+        \     filter(split(a:match_words, s:notslash . ','), {_, group -> group =~ s:notslash . '\w'}),
+        \     {_, group -> split(group, s:notslash . ':')}
         \   ),
         \   {_, patterns -> [patterns[0], patterns[-1:][0]]}
         \ )
@@ -50,7 +52,7 @@ endfunction
 " flags according to the context of the cursor position.
 function! s:flags(start, end)
   let cursor_col = getpos('.')[2]
-  let end_match_col = match(getline('.'), substitute(a:end, '\\\@<!\\\d', '', '')) + 1
+  let end_match_col = match(getline('.'), substitute(a:end, s:notslash . '\\\d', '', '')) + 1
 
   if end_match_col && end_match_col <= cursor_col
     call cursor('.', end_match_col)

@@ -33,6 +33,10 @@ endfunction
 " plugin only operate on pairs like if/endif, instead of simple pairs like
 " those found in &matchpairs.
 function! textobj#matchit#parse_match_words(match_words) abort
+  if a:match_words !~ ':'
+    return []
+  endif
+
   return map(
         \   map(
         \     filter(split(a:match_words, '\\\@<!,'), {_, group -> group =~ '\\\@<!\w'}),

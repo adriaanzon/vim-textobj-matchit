@@ -1,0 +1,2 @@
+Execute (it ignores a function name):
+  Assert empty(textobj#matchit#parse_match_words('GetMatchWords()'))

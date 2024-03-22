@@ -1,0 +1,22 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    strategy:
+      matrix:
+        version: [stable, nightly]
+        neovim: [true, false]
+    name: ${{ matrix.neovim && 'neovim' || 'vim' }} ${{ matrix.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          version: ${{ matrix.version }}
+          neovim: ${{ matrix.neovim }}
+      - run: make test
+        if: ${{ !matrix.neovim }}
+      - run: make test-nvim
+        if: ${{ matrix.neovim }}

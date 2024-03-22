@@ -1,4 +1,4 @@
-# vim-textobj-matchit [![CircleCI](https://circleci.com/gh/adriaanzon/vim-textobj-matchit.svg?style=svg)](https://circleci.com/gh/adriaanzon/vim-textobj-matchit)
+# vim-textobj-matchit
 
 A Vim plugin that creates text objects from matchit pairs, to be used with:
 

@@ -1,6 +1,6 @@
 set nocompatible
 
-runtime macros/matchit.vim
+packadd! matchit
 
 let &packpath = expand('<sfile>:p:h:h')
 

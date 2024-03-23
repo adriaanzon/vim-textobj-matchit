@@ -1,10 +1,12 @@
-test: deps
+test: test-vim test-neovim
+
+test-vim: dependencies
 	vim -u test/vimrc -c 'Vader! test/*.vader'
 
-test-nvim: deps
+test-neovim: dependencies
 	VADER_OUTPUT_FILE=/dev/stderr nvim -u test/vimrc -c 'Vader! test/*.vader' --headless
 
-deps:
+dependencies:
 	test -L pack/testing/start/vim-textobj-matchit && exit 0; \
 	mkdir -p pack/testing/start; \
 	cd pack/testing/start; \
@@ -16,4 +18,4 @@ deps:
 clean:
 	rm -rf pack
 
-.PHONY: test test-nvim deps clean
+.PHONY: test test-vim test-neovim dependencies clean

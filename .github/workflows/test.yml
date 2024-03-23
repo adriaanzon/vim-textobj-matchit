@@ -6,17 +6,15 @@ jobs:
   tests:
     strategy:
       matrix:
+        editor: [vim, neovim]
         version: [stable, nightly]
-        neovim: [true, false]
-    name: ${{ matrix.neovim && 'neovim' || 'vim' }} ${{ matrix.version }}
-    runs-on: ubuntu-latest
+        os: [ubuntu-latest, macos-latest]
+    name: ${{ matrix.editor }}-${{ matrix.version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: rhysd/action-setup-vim@v1
         with:
           version: ${{ matrix.version }}
-          neovim: ${{ matrix.neovim }}
-      - run: make test
-        if: ${{ !matrix.neovim }}
-      - run: make test-nvim
-        if: ${{ matrix.neovim }}
+          neovim: ${{ matrix.editor == 'neovim' }}
+      - run: make test-${{ matrix.editor }}

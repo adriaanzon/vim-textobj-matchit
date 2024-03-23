@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   tests:
     strategy:
+      fail-fast: false
       matrix:
         editor: [vim, neovim]
         version: [stable, nightly]
